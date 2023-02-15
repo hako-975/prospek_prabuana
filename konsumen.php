@@ -65,10 +65,14 @@
                                             <tr>
                                                 <td><?= $i++; ?></td>
                                                 <td><?= $data['nama_konsumen']; ?></td>
-                                                <td><?= $data['jenis_kelamin']; ?></td>
-                                                <td><?= $data['whatsapp']; ?></td>
-                                                <td><?= $data['pekerjaan']; ?></td>
-                                                <td><?= $data['id_konsumen']; ?></td>
+                                                <td><?= ucwords($data['jenis_kelamin']); ?></td>
+                                                <td><a href="https://wa.me/<?= $data['whatsapp']; ?>" target="_blank"><?= $data['whatsapp']; ?></a></td>
+                                                <td><?= ucwords($data['pekerjaan']); ?></td>
+                                                <td>
+                                                    <a href="detail_konsumen.php?id_konsumen=<?= $data['id_konsumen']; ?>" class="text-white btn btn-sm m-1 btn-info">Detail</a>
+                                                    <a href="ubah_konsumen.php?id_konsumen=<?= $data['id_konsumen']; ?>" class="text-white btn btn-sm m-1 btn-warning">Ubah</a>
+                                                    <a href="hapus_konsumen.php?id_konsumen=<?= $data['id_konsumen']; ?>" class="text-white btn btn-sm m-1 btn-danger">Hapus</a>
+                                                </td>
                                             </tr>
                                         <?php endforeach ?>
                                     </tbody>
