@@ -6,7 +6,7 @@
     </button>
 
     <!-- tambah prospek -->
-    <a href="" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Prospek</a>
+    <a href="konsumen.php?btn=tambahKonsumenModal" class="btn btn-sm btn-primary"><i class="fas fa-fw fa-plus"></i> Tambah Prospek</a>
 
 
     <!-- Topbar Navbar -->

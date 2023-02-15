@@ -318,6 +318,16 @@
     <?php include_once 'include/script.php'; ?>
 
     <?php 
+        if (isset($_GET['btn'])) {
+            if ($_GET['btn'] == 'tambahKonsumenModal') {
+                echo "
+                    <script>
+                        $('#tambahKonsumenModal').modal('show');
+                    </script>
+                ";
+            }
+        }
+
         if (isset($_POST['btnTambahKonsumen'])) {
             $nama_konsumen = htmlspecialchars($_POST['nama_konsumen']);
             $jenis_kelamin = htmlspecialchars($_POST['jenis_kelamin']);
@@ -364,12 +374,24 @@
             if ($insert_konsumen) {
                 echo "
                     <script>
+                        $('#tambahKonsumenModal').modal('hide');
+                        
                         Swal.fire({
+                          showDenyButton: true,
+                          denyButtonText: 'Lanjut ke Prospek?',
+                          confirmButtonText: 'Tetap di Konsumen',
                           title: 'Berhasil!',
                           text: 'Berhasil Tambah Konsumen!',
                           icon: 'success'
-                        }).then(function() {
-                            window.location = 'konsumen.php';
+                        }).then((result) => {
+                            if (result.isConfirmed)
+                            {
+                                window.location = 'konsumen.php';
+                            }
+                            else if (result.isDenied)
+                            {
+                                window.location = 'prospek.php?id_konsumen=".mysqli_insert_id($koneksi)."';
+                            }
                         });
                     </script>
                 ";

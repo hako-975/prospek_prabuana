@@ -1,26 +1,20 @@
 <?php 
     require_once 'koneksi.php';
 
-    $prospek = mysqli_query($koneksi, "SELECT * FROM prospek 
+    $id_prospek = $_GET['id_prospek'];
+
+    $data_prospek = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM prospek 
     INNER JOIN konsumen ON prospek.id_konsumen = konsumen.id_konsumen
     INNER JOIN status ON prospek.id_status = status.id_status
     INNER JOIN sumber ON prospek.id_sumber = sumber.id_sumber
-    ORDER BY id_prospek DESC");
-
-    $konsumen_not_in = mysqli_query($koneksi, "SELECT * FROM konsumen WHERE id_konsumen NOT IN (SELECT id_konsumen FROM prospek)");
-    $konsumen_in = mysqli_query($koneksi, "SELECT * FROM konsumen WHERE id_konsumen IN (SELECT id_konsumen FROM prospek)");
-    $status = mysqli_query($koneksi, "SELECT * FROM status");
-    $sumber = mysqli_query($koneksi, "SELECT * FROM sumber");
-
-    $follow_up = mysqli_query($koneksi, "SELECT * FROM follow_up INNER JOIN prospek ON prospek.id_prospek = follow_up.id_prospek GROUP BY prospek.id_prospek");
-
+    WHERE id_prospek = '$id_prospek'"));
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Prospek - Prospek Prabuana</title>
+    <title>Follow Up Konsumen - <?= $data_prospek['nama_konsumen']; ?></title>
 
     <?php include_once 'include/head.php'; ?>
 
@@ -53,10 +47,10 @@
                             <div class="card-header py-3">
                                 <div class="row">
                                     <div class="col head-left">
-                                        <h6 class="mt-2 font-weight-bold text-primary">Data Prospek</h6>
+                                        <h6 class="mt-2 font-weight-bold text-primary">Data Follow Up Konsumen - <?= $data_prospek['nama_konsumen']; ?></h6>
                                     </div>
                                     <div class="col head-right">
-                                        <button type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#tambahProspekModal"><i class="fas fa-fw fa-plus"></i> Tambah Prospek</button>
+                                        <button type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#tambahFollowUpModal"><i class="fas fa-fw fa-plus"></i> Tambah Follow Up</button>
                                     </div>
                                 </div>
                             </div>
@@ -91,14 +85,14 @@
                                                     <td class="align-middle"><?= $dp['status']; ?></td>
                                                     <td class="text-center align-middle">
                                                         <a class="btn btn-sm btn-success text-white m-1" href="follow_up.php?id_prospek=<?= $dp['id_prospek']; ?>"><i class="fas fa-fw fa-arrow-up"></i> Follow Up</a>
-                                                        <a class="btn btn-sm btn-warning text-white m-1" data-toggle="modal" data-target="#ubahProspekModal<?= $dp['id_prospek']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah</a>
-                                                        <div class="modal fade" id="ubahProspekModal<?= $dp['id_prospek']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahProspekModalLabel<?= $dp['id_prospek']; ?>" aria-hidden="true">
+                                                        <a class="btn btn-sm btn-warning text-white m-1" data-toggle="modal" data-target="#ubahFollowUpModal<?= $dp['id_prospek']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah</a>
+                                                        <div class="modal fade" id="ubahFollowUpModal<?= $dp['id_prospek']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="ubahFollowUpModalLabel<?= $dp['id_prospek']; ?>" aria-hidden="true">
                                                           <div class="modal-dialog text-left">
                                                             <form method="post" enctype="multipart/form-data">
                                                                 <input type="hidden" name="id_prospek" value="<?= $dp['id_prospek']; ?>">
                                                                 <div class="modal-content">
                                                                   <div class="modal-header">
-                                                                    <h5 class="modal-title" id="ubahProspekModalLabel<?= $dp['id_prospek']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah Prospek - <?= $dp['nama_konsumen']; ?></h5>
+                                                                    <h5 class="modal-title" id="ubahFollowUpModalLabel<?= $dp['id_prospek']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah Prospek - <?= $dp['nama_konsumen']; ?></h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                       <span aria-hidden="true">&times;</span>
                                                                     </button>
@@ -171,12 +165,12 @@
     <!-- End of Page Wrapper -->
 
     <!-- Tambah Prospek Modal -->
-    <div class="modal fade" id="tambahProspekModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="tambahProspekModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahFollowUpModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="tambahFollowUpModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <form method="post" enctype="multipart/form-data">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="tambahProspekModalLabel"><i class="fas fa-fw fa-plus"></i> Tambah Prospek</h5>
+                <h5 class="modal-title" id="tambahFollowUpModalLabel"><i class="fas fa-fw fa-plus"></i> Tambah Prospek</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -184,33 +178,14 @@
               <div class="modal-body">
                 <div class="form-group">
                     <label for="id_konsumen">Nama Konsumen<sup class="text-danger">*</sup></label>
-                        <select name="id_konsumen" id="id_konsumen" class="custom-select" required>
-                            <?php if (isset($_GET['id_konsumen'])): ?>
-                                <?php 
-                                    $id_konsumen = $_GET['id_konsumen'];
-                                    $konsumen_row_id = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM konsumen WHERE id_konsumen = '$id_konsumen'"));
-                                 ?>
-                                <option value="<?= $konsumen_row_id['id_konsumen']; ?>"><?= $konsumen_row_id['nama_konsumen']; ?></option>
-                                <?php foreach ($konsumen_not_in as $dk): ?>
-                                    <?php if ($id_konsumen != $dk['id_konsumen']): ?>
-                                        <option value="<?= $dk['id_konsumen']; ?>"><?= $dk['nama_konsumen']; ?></option>
-                                    <?php endif ?>
-                                <?php endforeach ?>
-                                <?php foreach ($konsumen_in as $dk): ?>
-                                    <?php if ($id_konsumen != $dk['id_konsumen']): ?>
-                                        <option disabled value="<?= $dk['id_konsumen']; ?>"><?= $dk['nama_konsumen']; ?> (Sudah ada Prospek)</option>
-                                    <?php endif ?>
-                                <?php endforeach ?>
-                            <?php else: ?>
-                                <?php foreach ($konsumen_not_in as $dk): ?>
-                                    <option value="<?= $dk['id_konsumen']; ?>"><?= $dk['nama_konsumen']; ?></option>
-                                <?php endforeach ?>
-                                <?php foreach ($konsumen_in as $dk): ?>
-                                    <option disabled value="<?= $dk['id_konsumen']; ?>"><?= $dk['nama_konsumen']; ?> (Sudah ada Prospek)</option>
-                                <?php endforeach ?>
-                            <?php endif ?>
-                        </select>
-                    <small><a href="konsumen.php?btn=tambahKonsumenModal">Tambah Konsumen?</a></small>
+                    <select name="id_konsumen" id="id_konsumen" class="custom-select" required>
+                        <?php foreach ($konsumen_not_in as $dk): ?>
+                            <option value="<?= $dk['id_konsumen']; ?>"><?= $dk['nama_konsumen']; ?></option>
+                        <?php endforeach ?>
+                        <?php foreach ($konsumen_in as $dk): ?>
+                            <option disabled value="<?= $dk['id_konsumen']; ?>"><?= $dk['nama_konsumen']; ?> (Sudah ada Prospek)</option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="id_status">Status<sup class="text-danger">*</sup></label>
@@ -247,14 +222,6 @@
     <?php include_once 'include/script.php'; ?>
 
     <?php 
-        if (isset($_GET['btn']) || isset($_GET['id_konsumen'])) {
-            echo "
-                <script>
-                    $('#tambahProspekModal').modal('show');
-                </script>
-            ";
-        }
-
         if (isset($_POST['btnTambahProspek'])) {
             $id_konsumen = htmlspecialchars($_POST['id_konsumen']);
             $id_status = htmlspecialchars($_POST['id_status']);
@@ -266,21 +233,11 @@
                 echo "
                     <script>
                         Swal.fire({
-                          showDenyButton: true,
-                          denyButtonText: 'Lanjut ke Follow Up?',
-                          confirmButtonText: 'Tetap di Prospek',
                           title: 'Berhasil!',
                           text: 'Berhasil Tambah Prospek!',
                           icon: 'success'
-                        }).then((result) => {
-                            if (result.isConfirmed)
-                            {
-                                window.location = 'prospek.php';
-                            }
-                            else if (result.isDenied)
-                            {
-                                window.location = 'follow_up.php?id_prospek=".mysqli_insert_id($koneksi)."';
-                            }
+                        }).then(function() {
+                            window.location = 'prospek.php';
                         });
                     </script>
                 ";
