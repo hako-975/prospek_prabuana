@@ -37,6 +37,7 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <a href="konsumen.php" class="mb-3 btn btn-primary"><i class="fas fa-fw fa-arrow-left"></i> Kembali</a>
 
                     <!-- Page Heading -->
                     <div class="align-items-center justify-content-between mb-4">

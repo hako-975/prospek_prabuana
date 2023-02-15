@@ -34,7 +34,6 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
                     <!-- Page Heading -->
                     <div class="align-items-center justify-content-between mb-4">
                         <div class="card shadow mb-4">
@@ -56,8 +55,8 @@
                                                 <th>No.</th>
                                                 <th>Nama Konsumen</th>
                                                 <th>Jenis Kelamin</th>
-                                                <th>WhatsApp</th>
                                                 <th>Pekerjaan</th>
+                                                <th>WhatsApp</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -68,8 +67,8 @@
                                                     <td class="align-middle"><?= $i++; ?></td>
                                                     <td class="align-middle"><?= $dk['nama_konsumen']; ?></td>
                                                     <td class="align-middle"><?= ucwords($dk['jenis_kelamin']); ?></td>
-                                                    <td class="text-success align-middle"><i class="fab fa-fw fa-whatsapp"></i> <a href="https://wa.me/<?= $dk['whatsapp']; ?>" target="_blank"><?= $dk['whatsapp']; ?></a></td>
                                                     <td class="align-middle"><?= ucwords($dk['pekerjaan']); ?></td>
+                                                    <td class="text-success align-middle"><i class="fab fa-fw fa-whatsapp"></i> <a href="https://wa.me/<?= $dk['whatsapp']; ?>" target="_blank"><?= $dk['whatsapp']; ?></a></td>
                                                     <td class="text-center align-middle">
                                                         <a class="btn btn-sm btn-primary text-white m-1" href="detail_konsumen.php?id_konsumen=<?= $dk['id_konsumen']; ?>"><i class="fas fa-fw fa-bars"></i> Detail</a>
                                                         <a class="btn btn-sm btn-warning text-white m-1" data-toggle="modal" data-target="#ubahKonsumenModal<?= $dk['id_konsumen']; ?>"><i class="fas fa-fw fa-edit"></i> Ubah</a>
