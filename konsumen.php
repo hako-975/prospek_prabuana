@@ -41,7 +41,7 @@
                             <div class="card-header py-3">
                                 <div class="row">
                                     <div class="col head-left">
-                                        <h6 class="m-0 font-weight-bold text-primary">Data Konsumen</h6>
+                                        <h6 class="mt-2 font-weight-bold text-primary">Data Konsumen</h6>
                                     </div>
                                     <div class="col head-right">
                                         <button type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#tambahKonsumenModal"><i class="fas fa-fw fa-plus"></i> Tambah Konsumen</button>
