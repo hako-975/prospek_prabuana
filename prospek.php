@@ -67,8 +67,9 @@
                                             <tr class="text-center">
                                                 <th>No.</th>
                                                 <th>Nama Konsumen</th>
+                                                <th>Tanggal Prospek Masuk</th>
                                                 <th>Sumber</th>
-                                                <th>Follow Up ke</th>
+                                                <th>Follow Up</th>
                                                 <th>Status</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -79,6 +80,7 @@
                                                 <tr>
                                                     <td class="align-middle"><?= $i++; ?></td>
                                                     <td class="align-middle"><?= $dp['nama_konsumen']; ?></td>
+                                                    <td class="align-middle"><?= date("l, d-M-Y, H:i", strtotime($dp['tanggal_prospek_masuk'])); ?></td>
                                                     <td class="align-middle"><?= $dp['sumber']; ?></td>
                                                     <td class="align-middle">
                                                         <?php 
@@ -133,6 +135,10 @@
                                                                                 <option value="<?= $ds['id_sumber']; ?>"><?= $ds['sumber']; ?></option>
                                                                             <?php endforeach ?>
                                                                         </select>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="tanggal_prospek_masuk">Tanggal Prospek Masuk<sup class="text-danger">*</sup></label>
+                                                                        <input type="datetime-local" class="form-control" id="tanggal_prospek_masuk" name="tanggal_prospek_masuk" placeholder="Tanggal Follow Up" required value="<?= (isset($_POST['tanggal_prospek_masuk']) ? ($_POST['tanggal_prospek_masuk'] == '' ? $dp['tanggal_prospek_masuk'] : $_POST['tanggal_prospek_masuk']) : $dp['tanggal_prospek_masuk']); ?>">
                                                                     </div>
                                                                   </div>
                                                                   <div class="modal-footer">
@@ -228,6 +234,10 @@
                         <?php endforeach ?>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="tanggal_prospek_masuk">Tanggal Prospek Masuk<sup class="text-danger">*</sup></label>
+                    <input type="datetime-local" class="form-control" id="tanggal_prospek_masuk" name="tanggal_prospek_masuk" placeholder="Tanggal Follow Up" required value="<?= (isset($_POST['tanggal_prospek_masuk']) ? ($_POST['tanggal_prospek_masuk'] == '' ? date('Y-m-d\TH:i') : $_POST['tanggal_prospek_masuk']) : date('Y-m-d\TH:i')); ?>">
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-fw fa-times"></i> Batal</button>
@@ -259,8 +269,9 @@
             $id_konsumen = htmlspecialchars($_POST['id_konsumen']);
             $id_status = htmlspecialchars($_POST['id_status']);
             $id_sumber = htmlspecialchars($_POST['id_sumber']);
+            $tanggal_prospek_masuk = htmlspecialchars($_POST['tanggal_prospek_masuk']);
 
-            $insert_prospek = mysqli_query($koneksi, "INSERT INTO prospek (id_konsumen, id_status, id_sumber) VALUES ('$id_konsumen', '$id_status', '$id_sumber')");
+            $insert_prospek = mysqli_query($koneksi, "INSERT INTO prospek (id_konsumen, id_status, id_sumber, tanggal_prospek_masuk) VALUES ('$id_konsumen', '$id_status', '$id_sumber', '$tanggal_prospek_masuk')");
 
             if ($insert_prospek) {
                 echo "
@@ -279,7 +290,7 @@
                             }
                             else if (result.isDenied)
                             {
-                                window.location = 'follow_up.php?id_prospek=".mysqli_insert_id($koneksi)."';
+                                window.location = 'follow_up.php?id_prospek=".mysqli_insert_id($koneksi)."&btn=follow_up';
                             }
                         });
                     </script>
@@ -306,9 +317,10 @@
             $id_konsumen = htmlspecialchars($_POST['id_konsumen']);
             $id_status = htmlspecialchars($_POST['id_status']);
             $id_sumber = htmlspecialchars($_POST['id_sumber']);
+            $tanggal_prospek_masuk = htmlspecialchars($_POST['tanggal_prospek_masuk']);
 
 
-            $update_prospek = mysqli_query($koneksi, "UPDATE prospek SET id_prospek = '$id_prospek', id_konsumen = '$id_konsumen', id_status = '$id_status', id_sumber = '$id_sumber' WHERE id_prospek = '$id_prospek'");
+            $update_prospek = mysqli_query($koneksi, "UPDATE prospek SET id_prospek = '$id_prospek', id_konsumen = '$id_konsumen', id_status = '$id_status', id_sumber = '$id_sumber', tanggal_prospek_masuk = '$tanggal_prospek_masuk' WHERE id_prospek = '$id_prospek'");
 
             if ($update_prospek) {
                 echo "

@@ -146,30 +146,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Page Heading -->
-                    <div class="align-items-center justify-content-between mb-4">
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <div class="row">
-                                    <div class="col head-left">
-                                        <h6 class="mt-2 font-weight-bold text-primary">Follow Up Konsumen - <?= $dk['nama_konsumen']; ?></h6>
-                                    </div>
-                                    <div class="col head-right">
-                                        <button type="button" class="btn btn-sm btn-primary"  data-toggle="modal" data-target="#tambahFollowUpModal"><i class="fas fa-fw fa-plus"></i> Tambah Follow Up</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
