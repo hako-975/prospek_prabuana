@@ -48,6 +48,13 @@
             </div>
         </div>
     </li>
+    <hr class="sidebar-divider my-0">
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="laporan.php">
+            <i class="fas fa-fw fa-file-alt"></i>
+            <span>Laporan</span></a>
+    </li>
 
     
 

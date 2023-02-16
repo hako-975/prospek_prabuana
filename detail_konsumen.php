@@ -137,7 +137,9 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    <embed type="application/pdf" src="data/ktp/<?= $dk['upload_ktp']; ?>" width="160" height="100"></embed>
+                                                    <?php if ($dk['upload_ktp']): ?>
+                                                        <embed type="application/pdf" src="data/ktp/<?= $dk['upload_ktp']; ?>" width="160" height="100"></embed>
+                                                    <?php endif ?>
                                                 </td>
                                             </tr>
                                         </table>
