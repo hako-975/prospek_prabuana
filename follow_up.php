@@ -7,7 +7,7 @@
     INNER JOIN konsumen ON prospek.id_konsumen = konsumen.id_konsumen
     INNER JOIN status ON prospek.id_status = status.id_status
     INNER JOIN sumber ON prospek.id_sumber = sumber.id_sumber
-    WHERE id_prospek = '$id_prospek'"));
+    WHERE prospek.id_prospek = '$id_prospek'"));
 
     $follow_up_ke = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM follow_up WHERE id_prospek = '$id_prospek'"));
 

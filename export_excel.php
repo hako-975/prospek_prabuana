@@ -1,10 +1,24 @@
 <?php 
 	require_once 'koneksi.php';
-	$data_prospek = mysqli_query($koneksi, "SELECT * FROM prospek 
-    INNER JOIN konsumen ON prospek.id_konsumen = konsumen.id_konsumen
-    INNER JOIN status ON prospek.id_status = status.id_status
-    INNER JOIN sumber ON prospek.id_sumber = sumber.id_sumber
-    ORDER BY id_prospek DESC");
+
+    if (isset($_GET['btnFilter'])) {
+        $dari_tanggal = $_GET['dari_tanggal'] .' '. '00:00:00';
+        $sampai_tanggal = $_GET['sampai_tanggal'] .' '. '23:59:59';
+        $data_prospek = mysqli_query($koneksi, "SELECT * FROM prospek 
+        INNER JOIN konsumen ON prospek.id_konsumen = konsumen.id_konsumen
+        INNER JOIN status ON prospek.id_status = status.id_status
+        INNER JOIN sumber ON prospek.id_sumber = sumber.id_sumber
+        WHERE prospek.tanggal_prospek_masuk BETWEEN '$dari_tanggal' AND '$sampai_tanggal' 
+        ORDER BY prospek.id_prospek DESC");
+    }
+    else
+    {
+        $data_prospek = mysqli_query($koneksi, "SELECT * FROM prospek 
+        INNER JOIN konsumen ON prospek.id_konsumen = konsumen.id_konsumen
+        INNER JOIN status ON prospek.id_status = status.id_status
+        INNER JOIN sumber ON prospek.id_sumber = sumber.id_sumber
+        ORDER BY prospek.id_prospek DESC");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +35,14 @@
 <body>
  
 	<?php
-        $filename = "Data Prospek - ".date('d_m_Y').".xls";
+        $dari_tanggal_title = date('d-m-Y', strtotime($_GET['dari_tanggal']));
+        $sampai_tanggal_title = date('d-m-Y', strtotime($_GET['sampai_tanggal']));
+        $filename = "Data Prospek ".$dari_tanggal_title." sd ".$sampai_tanggal_title.".xls";
 		header("Content-type: application/vnd-ms-excel");
 		header("Content-Disposition: attachment; filename=".$filename);
 	?>
     <center>
-        <h1>Data Prospek - <?= date('d/m/Y'); ?></h1>
+        <h1>Data Prospek <?= $dari_tanggal_title; ?> s/d <?= $sampai_tanggal_title; ?></h1>
     </center>
 	<table border="1" cellpadding="10" cellspacing="0">
         <tr>

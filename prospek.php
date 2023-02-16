@@ -5,7 +5,7 @@
     INNER JOIN konsumen ON prospek.id_konsumen = konsumen.id_konsumen
     INNER JOIN status ON prospek.id_status = status.id_status
     INNER JOIN sumber ON prospek.id_sumber = sumber.id_sumber
-    ORDER BY id_prospek DESC");
+    ORDER BY prospek.id_prospek DESC");
 
     $konsumen_not_in = mysqli_query($koneksi, "SELECT * FROM konsumen WHERE id_konsumen NOT IN (SELECT id_konsumen FROM prospek)");
     $konsumen_in = mysqli_query($koneksi, "SELECT * FROM konsumen WHERE id_konsumen IN (SELECT id_konsumen FROM prospek)");
