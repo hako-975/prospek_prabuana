@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Feb 2023 pada 20.54
+-- Waktu pembuatan: 17 Feb 2023 pada 07.33
 -- Versi server: 10.4.27-MariaDB
 -- Versi PHP: 8.2.0
 
@@ -71,7 +71,8 @@ CREATE TABLE `konsumen` (
 
 INSERT INTO `konsumen` (`id_konsumen`, `nama_konsumen`, `jenis_kelamin`, `alamat`, `nik`, `npwp`, `whatsapp`, `instagram`, `email`, `pekerjaan`, `gaji`, `upload_ktp`) VALUES
 (1, 'Andri Firman Saputra', 'pria', '', '', '', '6287808675313', '', '', 'pegawai / karyawan', 6000000, ''),
-(2, 'Akhsya', 'pria', '', '', '', '62898998', '', '', 'pegawai / karyawan', 0, '');
+(2, 'Akhsya', 'pria', '', '', '', '62898998', '', '', 'pegawai / karyawan', 0, ''),
+(3, 'Andre', 'pria', '', '', '', '6287733932416', '', '', 'pegawai / karyawan', 0, '');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,8 @@ CREATE TABLE `prospek` (
 
 INSERT INTO `prospek` (`id_prospek`, `tanggal_prospek_masuk`, `id_konsumen`, `id_status`, `id_sumber`) VALUES
 (1, '2023-02-16 23:53:00', 1, 1, 3),
-(2, '2023-02-16 23:53:00', 2, 4, 1);
+(2, '2023-02-16 23:53:00', 2, 4, 1),
+(3, '2023-02-17 13:28:00', 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -195,13 +197,13 @@ ALTER TABLE `follow_up`
 -- AUTO_INCREMENT untuk tabel `konsumen`
 --
 ALTER TABLE `konsumen`
-  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_konsumen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `prospek`
 --
 ALTER TABLE `prospek`
-  MODIFY `id_prospek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_prospek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `status`
