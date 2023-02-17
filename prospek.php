@@ -79,7 +79,7 @@
                                             <?php foreach ($prospek as $dp): ?>
                                                 <tr>
                                                     <td class="align-middle"><?= $i++; ?></td>
-                                                    <td class="align-middle"><?= $dp['nama_konsumen']; ?></td>
+                                                    <td class="align-middle"><a href="detail_konsumen.php?id_konsumen=<?= $dp['id_konsumen']; ?>"><?= $dp['nama_konsumen']; ?></a></td>
                                                     <td class="align-middle"><?= date("l, d-M-Y, H:i", strtotime($dp['tanggal_prospek_masuk'])); ?></td>
                                                     <td class="align-middle"><?= $dp['sumber']; ?></td>
                                                     <td class="align-middle">

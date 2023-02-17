@@ -65,7 +65,7 @@
                                             <tr>
                                                 <th style="width: 130px" class="text-right">Jenis Kelamin</th>
                                                 <td style="width: 1rem"></td>
-                                                <td><?= $dk['jenis_kelamin']; ?></td>
+                                                <td><?= ucwords($dk['jenis_kelamin']); ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 130px" class="text-right">Alamat</th>
@@ -112,7 +112,7 @@
                                             <tr>
                                                 <th style="width: 130px" class="text-right">Pekerjaan</th>
                                                 <td style="width: 1rem"></td>
-                                                <td><?= $dk['pekerjaan']; ?></td>
+                                                <td><?= ucwords($dk['pekerjaan']); ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 130px" class="text-right">Gaji</th>
