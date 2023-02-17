@@ -11,8 +11,8 @@
     $persentase_closing = 0;
 
     if ($jml_prospek != 0) {
-        $persentase_survei =  ($jml_survei / $jml_prospek) * 100;
-        $persentase_closing =  ($jml_closing / $jml_prospek) * 100;
+        $persentase_survei = substr(($jml_survei / $jml_prospek) * 100, 0, 5);
+        $persentase_closing = substr(($jml_closing / $jml_prospek) * 100, 0, 5);
     }
     
 ?>
