@@ -67,13 +67,13 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="dari_tanggal">Dari Tanggal</label>
-                                                        <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" value="<?= date('Y-m-01'); ?>" required>
+                                                        <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" value="<?= (isset($_GET['dari_tanggal'])) ? $_GET['dari_tanggal'] : date('Y-m-01'); ?>" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="sampai_tanggal">Sampai Tanggal</label>
-                                                        <input type="date" class="form-control" id="sampai_tanggal" name="sampai_tanggal" value="<?= date('Y-m-d'); ?>" required>
+                                                        <input type="date" class="form-control" id="sampai_tanggal" name="sampai_tanggal" value="<?= (isset($_GET['sampai_tanggal'])) ? $_GET['sampai_tanggal'] : date('Y-m-d'); ?>" required>
                                                     </div>
                                                 </div>
                                             </div>
